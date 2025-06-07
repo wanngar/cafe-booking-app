@@ -10,5 +10,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 80
 
-#CMD ["gunicorn", "--bind", "0.0.0.0:80", "cafe_booking.wsgi:application"]
 CMD ["gunicorn", "--bind", "0.0.0.0:80", "--workers", "4", "--timeout", "120", "cafe_booking.wsgi:application"]
