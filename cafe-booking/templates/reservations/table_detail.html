@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Столик №{{ table.number }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ table.image_url }}" class="img-fluid rounded" alt="Столик №{{ table.number }}">
+    </div>
+    <div class="col-md-6">
+        <h1>Столик №{{ table.number }}</h1>
+        <p><strong>Мест:</strong> {{ table.seats }}</p>
+        <p><strong>Форма:</strong> {{ table.get_shape_display }}</p>
+        <p><strong>Размер:</strong> {{ table.width }}м × {{ table.length }}м</p>
+        <p><strong>Описание:</strong> {{ table.description }}</p>
+
+        <a href="{% url 'create_reservation' table.id %}" class="btn btn-success btn-lg mt-3">
+            Забронировать этот столик
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Выбор столика{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Выберите столик</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for table in tables %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{ table.image.url }}" class="card-img-top" alt="Столик №{{ table.number }}">
+            <div class="card-body">
+                <h5 class="card-title">Столик №{{ table.number }}</h5>
+                <p class="card-text">
+                    <strong>Мест:</strong> {{ table.seats }}<br>
+                    <strong>Форма:</strong> {{ table.get_shape_display }}<br>
+                    <strong>Размер:</strong> {{ table.width }}м × {{ table.length }}м
+                </p>
+                <a href="{% url 'table_detail' table.pk %}" class="btn btn-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Бронирование столика{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Бронирование столика №{{ form.initial.table.number }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="{{ form.customer_name.id_for_label }}" class="form-label">Ваше имя</label>
+            {{ form.customer_name }}
+            {% if form.customer_name.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.customer_name.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.customer_phone.id_for_label }}" class="form-label">Телефон</label>
+            {{ form.customer_phone }}
+            {% if form.customer_phone.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.customer_phone.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.customer_email.id_for_label }}" class="form-label">Email</label>
+        {{ form.customer_email }}
+        {% if form.customer_email.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.customer_email.errors.0 }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="{{ form.date.id_for_label }}" class="form-label">Дата</label>
+            {{ form.date }}
+            {% if form.date.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.date.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <label for="{{ form.time.id_for_label }}" class="form-label">Время</label>
+            {{ form.time }}
+            {% if form.time.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.time.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <label for="{{ form.duration.id_for_label }}" class="form-label">Длительность (часы)</label>
+            {{ form.duration }}
+            {% if form.duration.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.duration.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.guests.id_for_label }}" class="form-label">Количество гостей</label>
+        {{ form.guests }}
+        {% if form.guests.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.guests.errors.0 }}
+            </div>
+        {% endif %}
+    </div>
+
+    <input type="hidden" name="table" value="{{ form.initial.table.id }}">
+
+    <button type="submit" class="btn btn-primary">Отправить заявку</button>
+    <a href="{% url 'table_detail' form.initial.table.id %}" class="btn btn-secondary">Назад</a>
+</form>
+{% endblock %}
